@@ -89,42 +89,8 @@
                     [, , , , ],
                     [, , , , ]
                 ];
-
-                lime.src = 'assets/lime-small.png';
-                lemon.src = 'assets/lemon-small.png';
-                orange.src = 'assets/orange-small.png';
-                rottenLemon.src = 'assets/rottenLemon.png';
-                grapeFruit.src = 'assets/grapefruit-small.png';
-                grapeFruitJar01.src = 'assets/grapeFruitJar01.png';
-                grapeFruitJar02.src = 'assets/grapeFruitJar02.png';
-                grapeFruitJar03.src = 'assets/grapeFruitJar03.png';
-                grapeFruitJarPower.src = 'assets/grapeFruitJarPower.png';
-                orangeJar01.src = 'assets/orangeJar01.png';
-                orangeJar02.src = 'assets/orangeJar02.png';
-                orangeJar03.src = 'assets/orangeJar03.png';
-                orangeJarPower.src = 'assets/orangeJarPower.png';
-                lemonJar01.src = 'assets/lemonJar01.png';
-                lemonJar02.src = 'assets/lemonJar02.png';
-                lemonJar03.src = 'assets/lemonJar03.png';
-                lemonJarPower.src = 'assets/lemonJarPower.png';
-                emptyJar.src = 'assets/emptyJar.png';
-                limeJar01.src = 'assets/limeJar01.png';
-                limeJar02.src = 'assets/limeJar02.png';
-                limeJar03.src = 'assets/limeJar03.png';
-                limeJarPower.src = 'assets/limeJarPower.png';
-                bloodOrange.src = 'assets/bloodorange-small.png';
-                bloodOrangeJar01.src = 'assets/bloodOrangeJar01.png';
-                bloodOrangeJar02.src = 'assets/bloodOrangeJar02.png';
-                bloodOrangeJar03.src = 'assets/bloodOrangeJar03.png';
-                bloodOrangeJarPower.src = 'assets/bloodOrangeJarPower.png';
-                //backgroundIdea.src = 'assets/backgroundIdea.png';
-                //backgroundIdea02.src = 'assets/backgroundIdea02.png';
-                //backgroundIdea03.src = 'assets/backgroundIdea03.png';
-                //backgroundIdea04.src = 'assets/backgroundIdea04.png';
-                backgroundIdea05.src = 'assets/backgroundIdea05.png';
-                selector.src = 'assets/selector.png';
-                plus100.src = 'assets/plus100.png';
-
+                
+                loadAssets();
 
                 // Attach a mouse click event listener for switching droplet colors
                 $("#myCanvas").click(function (e) {
@@ -177,6 +143,43 @@
                     }
                     draw();
                 });
+
+                function loadAssets() {
+                    lime.src = 'assets/lime-small.png';
+                    lemon.src = 'assets/lemon-small.png';
+                    orange.src = 'assets/orange-small.png';
+                    rottenLemon.src = 'assets/rottenLemon.png';
+                    grapeFruit.src = 'assets/grapefruit-small.png';
+                    grapeFruitJar01.src = 'assets/grapeFruitJar01.png';
+                    grapeFruitJar02.src = 'assets/grapeFruitJar02.png';
+                    grapeFruitJar03.src = 'assets/grapeFruitJar03.png';
+                    grapeFruitJarPower.src = 'assets/grapeFruitJarPower.png';
+                    orangeJar01.src = 'assets/orangeJar01.png';
+                    orangeJar02.src = 'assets/orangeJar02.png';
+                    orangeJar03.src = 'assets/orangeJar03.png';
+                    orangeJarPower.src = 'assets/orangeJarPower.png';
+                    lemonJar01.src = 'assets/lemonJar01.png';
+                    lemonJar02.src = 'assets/lemonJar02.png';
+                    lemonJar03.src = 'assets/lemonJar03.png';
+                    lemonJarPower.src = 'assets/lemonJarPower.png';
+                    emptyJar.src = 'assets/emptyJar.png';
+                    limeJar01.src = 'assets/limeJar01.png';
+                    limeJar02.src = 'assets/limeJar02.png';
+                    limeJar03.src = 'assets/limeJar03.png';
+                    limeJarPower.src = 'assets/limeJarPower.png';
+                    bloodOrange.src = 'assets/bloodorange-small.png';
+                    bloodOrangeJar01.src = 'assets/bloodOrangeJar01.png';
+                    bloodOrangeJar02.src = 'assets/bloodOrangeJar02.png';
+                    bloodOrangeJar03.src = 'assets/bloodOrangeJar03.png';
+                    bloodOrangeJarPower.src = 'assets/bloodOrangeJarPower.png';
+                    //backgroundIdea.src = 'assets/backgroundIdea.png';
+                    //backgroundIdea02.src = 'assets/backgroundIdea02.png';
+                    //backgroundIdea03.src = 'assets/backgroundIdea03.png';
+                    //backgroundIdea04.src = 'assets/backgroundIdea04.png';
+                    backgroundIdea05.src = 'assets/backgroundIdea05.png';
+                    selector.src = 'assets/selector.png';
+                    plus100.src = 'assets/plus100.png'; 
+                }
 
                 function draw() {
                     // Clear Canvas
