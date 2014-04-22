@@ -28,68 +28,75 @@
 
         <script type="text/javascript">
             //TEST BUILD SCRIPT
+            // VARIABLES----------------------------------------------------------------------------------------------------------------------------------------------
+
+            var playerScore = 0;
+            var limeCount = 0;
+            var lemonCount = 0;
+            var bloodOrangeCount = 0;
+            var orangeCount = 0;
+            var grapeFruitCount = 0;
+            var time = 10;
+            var pauseTime = 0;
+            var fontStyle = "bold 16px Helvetica";
+            var firstClick = true;
+            var firstClickX = 0;
+            var firstClickY = 0;
+            var temp = " ";
+            var temp2 = " ";
+            var emptyJar = new Image();
+            var lime = new Image();
+            var limeJar01 = new Image();
+            var limeJar02 = new Image();
+            var limeJar03 = new Image();
+            var limeJarPower = new Image();
+            var bloodOrange = new Image();
+            var bloodOrangeJar01 = new Image();
+            var bloodOrangeJar02 = new Image();
+            var bloodOrangeJar03 = new Image();
+            var bloodOrangeJarPower = new Image();
+            var lemonJar01 = new Image();
+            var lemonJar02 = new Image();
+            var lemonJar03 = new Image();
+            var lemonJarPower = new Image();
+            var orangeJarPower = new Image();
+            var orangeJar01 = new Image();
+            var orangeJar02 = new Image();
+            var orangeJar03 = new Image();
+            var grapeFruitJarPower = new Image();
+            var grapeFruitJar01 = new Image();
+            var grapeFruitJar02 = new Image();
+            var grapeFruitJar03 = new Image();
+            //var backgroundIdea = new Image();
+            //var backgroundIdea02 = new Image();
+            //var backgroundIdea03 = new Image();
+            //var backgroundIdea04 = new Image();
+            var backgroundIdea05 = new Image();
+            var selector = new Image();
+            var rottenLemon = new Image();
+            var lemon = new Image();
+            var orange = new Image();
+            var grapeFruit = new Image();
+            var plus100 = new Image();
+            var citrusStartMenu = new Image();
+            var sfx01 = new Audio("/assets/rottenSplat.mp3");
+            var fps = 1;
+            var fruits =
+            [
+                [lime, lemon, bloodOrange, grapeFruit, orange],
+                [, , , , ],
+                [, , , , ],
+                [, , , , ],
+                [, , , , ]
+            ];
+
+            // INIT FUNCTION-------------------------------------------------------------------------------------------------------------------------------------------------
             function init() {
+
                 var canvas = document.getElementById('myCanvas');
                 var ctx = canvas.getContext('2d');
                 var width = canvas.getAttribute('width');
                 var height = canvas.getAttribute('height');
-                var playerScore = 0;
-                var limeCount = 0;
-                var lemonCount = 0;
-                var bloodOrangeCount = 0;
-                var orangeCount = 0;
-                var grapeFruitCount = 0;
-                var time = 10;
-                var fontStyle = "bold 16px Helvetica";
-                var firstClick = true;
-                var firstClickX = 0;
-                var firstClickY = 0;
-                var temp = " ";
-                var temp2 = " ";
-                var emptyJar = new Image();
-                var lime = new Image();
-                var limeJar01 = new Image();
-                var limeJar02 = new Image();
-                var limeJar03 = new Image();
-                var limeJarPower = new Image();
-                var bloodOrange = new Image();
-                var bloodOrangeJar01 = new Image();
-                var bloodOrangeJar02 = new Image();
-                var bloodOrangeJar03 = new Image();
-                var bloodOrangeJarPower = new Image();
-                var lemonJar01 = new Image();
-                var lemonJar02 = new Image();
-                var lemonJar03 = new Image();
-                var lemonJarPower = new Image();
-                var orangeJarPower = new Image();
-                var orangeJar01 = new Image();
-                var orangeJar02 = new Image();
-                var orangeJar03 = new Image();
-                var grapeFruitJarPower = new Image();
-                var grapeFruitJar01 = new Image();
-                var grapeFruitJar02 = new Image();
-                var grapeFruitJar03 = new Image();
-                //var backgroundIdea = new Image();
-                //var backgroundIdea02 = new Image();
-                //var backgroundIdea03 = new Image();
-                //var backgroundIdea04 = new Image();
-                var backgroundIdea05 = new Image();
-                var selector = new Image();
-                var rottenLemon = new Image();
-                var lemon = new Image();
-                var orange = new Image();
-                var grapeFruit = new Image();
-                var plus100 = new Image();
-                var citrusStartMenu = new Image();
-                var sfx01 = new Audio("/assets/rottenSplat.mp3");
-                var fruits =
-                [
-                    [lime, lemon, bloodOrange, grapeFruit, orange],
-                    [, , , , ],
-                    [, , , , ],
-                    [, , , , ],
-                    [, , , , ]
-                ];
 
                 loadAssets();
 
@@ -145,6 +152,7 @@
                     draw();
                 });
 
+                // LOAD ASSETS FUNCTION--------------------------------------------------------------------------------------------------------------------------------
                 function loadAssets() {
                     lime.src = 'assets/lime-small.png';
                     lemon.src = 'assets/lemon-small.png';
@@ -184,6 +192,7 @@
                     startMenu();
                 }
 
+                // DRAW FUNCTION-----------------------------------------------------------------------------------------------------------------------------------------
                 function draw() {
                     // Clear Canvas
                     clear();
@@ -278,7 +287,7 @@
                     ctx.fillText("Score: " + (playerScore), 370, 0);
                 };
 
-                // TIMER FUNCTION
+                // TIMER FUNCTION--------------------------------------------------------------------------------------------------------------------------------------------
                 var myVar = setInterval(function () { myTimer() }, 1000);
 
                 function myTimer() {
@@ -290,7 +299,7 @@
                     }
                 }
 
-                // SCORE FUNCTION (Check to see if score should be increased)
+                // SCORE FUNCTION (Check to see if score should be increased)--------------------------------------------------------------------------------------------------
                 function scored() {
                     if (fruits[4][0] == lime) {
                         playerScore = playerScore + 100;
@@ -315,7 +324,7 @@
                     moveBoard();
                 }
 
-                // Move array elements along their respective 'column' and randomly populate top row
+                // Move array elements along their respective 'column' and randomly populate top row-------------------------------------------------------------------------------
                 function moveBoard() {
                     for (var i = fruits.length - 1; i >= 0; --i) {
                         for (var j = fruits[i].length - 1; j >= 0; --j) {
@@ -345,6 +354,7 @@
                     }
                 }
 
+                // START MENU FUNCTION--------------------------------------------------------------------------------------------------------------------------------------------
                 function startMenu() {
                     ctx.clearRect(0, 0, 500, 500);
                     ctx.drawImage(citrusStartMenu, 0, 0);
@@ -354,32 +364,42 @@
                     });
                 }
 
-                // Update Function
+                // Update Function----------------------------------------------------------------------------------------------------------------------------------------------
                 var update = function (modifier) {
 
                 };
 
-                // Clear Canvas Function
+                // Clear Canvas Function----------------------------------------------------------------------------------------------------------------------------------------
                 function clear() {
                     var canvas = document.getElementById('myCanvas');
                     var ctx = canvas.getContext('2d');
                     ctx.clearRect(0, 0, 500, 500);
                 };
 
-                // Pause Game
+                // Pause Game----------------------------------------------------------------------------------------------------------------------------------------------------
+                var gamePaused = true;
+                $("#pause").click(function (e) {
+                    pauseGame();
+                });
                 function keyDown(e) {
                     if (e.keyCode == 80) pauseGame();
+                    console.log('e key pressed');
                 }
                 function pauseGame() {
                     if (!gamePaused) {
+                        interval = setInterval(main, fps);
+                        time = pauseTime;
+                        pauseTime = 0;
                         gamePaused = true;
-                    } else if (gamePaused){
-                        /* update = ; */
+                    } else if (gamePaused) {
+                        clearInterval(interval);
+                        pauseTime = time;
+                        time = 0;
                         gamePaused = false;
                     }
                 }
 
-                // The main game loop
+                // The main game loop-------------------------------------------------------------------------------------------------------------------------------------------
                 var main = function () {
                     var now = Date.now();
                     var delta = now - then;
@@ -390,10 +410,10 @@
                     then = now;
                 };
 
-                // Let's play this game!
+                // Let's play this game!-----------------------------------------------------------------------------------------------------------------------------------------
                 clear();
                 var then = Date.now();
-                setInterval(main, 1); // Execute as fast as possible
+                var interval = setInterval(main, fps); // Execute as fast as possible
             }
 
         </script>
@@ -409,6 +429,7 @@
             <div class="controls">
                 <a href="http://game.oopiedoopie.com/dragon.html"><h4>Next Project</h4></a>
             </div>
+            <div id="pause" style="color: white;"><p>PAUSE</p></div>
             <div class="displayArray"></div>
         </div>
         <!--<script type="text/javascript" src="citrus-power-script.js"></script>-->
