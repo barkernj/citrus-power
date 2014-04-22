@@ -80,6 +80,7 @@
                 var orange = new Image();
                 var grapeFruit = new Image();
                 var plus100 = new Image();
+                var citrusStartMenu = new Image();
                 var sfx01 = new Audio("/assets/rottenSplat.mp3");
                 var fruits =
                 [
@@ -89,7 +90,7 @@
                     [, , , , ],
                     [, , , , ]
                 ];
-                
+
                 loadAssets();
 
                 // Attach a mouse click event listener for switching droplet colors
@@ -178,7 +179,9 @@
                     //backgroundIdea04.src = 'assets/backgroundIdea04.png';
                     backgroundIdea05.src = 'assets/backgroundIdea05.png';
                     selector.src = 'assets/selector.png';
-                    plus100.src = 'assets/plus100.png'; 
+                    plus100.src = 'assets/plus100.png';
+                    citrusStartMenu.src = 'assets/citrus-start-menu.png';
+                    startMenu();
                 }
 
                 function draw() {
@@ -342,6 +345,15 @@
                     }
                 }
 
+                function startMenu() {
+                    ctx.clearRect(0, 0, 500, 500);
+                    ctx.drawImage(citrusStartMenu, 0, 0);
+
+                    $("#myCanvas").click(function (e) {
+                        ctx.drawImage(citrusStartMenu, 0, 0);
+                    });
+                }
+
                 // Update Function
                 var update = function (modifier) {
 
@@ -353,6 +365,19 @@
                     var ctx = canvas.getContext('2d');
                     ctx.clearRect(0, 0, 500, 500);
                 };
+
+                // Pause Game
+                function keyDown(e) {
+                    if (e.keyCode == 80) pauseGame();
+                }
+                function pauseGame() {
+                    if (!gamePaused) {
+                        gamePaused = true;
+                    } else if (gamePaused){
+                        /* update = ; */
+                        gamePaused = false;
+                    }
+                }
 
                 // The main game loop
                 var main = function () {
@@ -370,6 +395,7 @@
                 var then = Date.now();
                 setInterval(main, 1); // Execute as fast as possible
             }
+
         </script>
     </head>
     <body onload="init()">
