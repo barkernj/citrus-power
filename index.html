@@ -30,6 +30,8 @@
             //TEST BUILD SCRIPT
             // VARIABLES----------------------------------------------------------------------------------------------------------------------------------------------
 
+            var xClick = -1;
+            var yClick = -1;
             var playerScore = 0;
             var limeCount = 0;
             var lemonCount = 0;
@@ -81,6 +83,7 @@
             var citrusStartMenu = new Image();
             var sfx01 = new Audio("/assets/rottenSplat.mp3");
             var fps = 1;
+            var serveCount = 3;
             var fruits =
             [
                 [lime, lemon, bloodOrange, grapeFruit, orange],
@@ -322,6 +325,56 @@
                         lemonCount = lemonCount + 1;
                     }
                     moveBoard();
+                }
+
+                // MAKE SMOOTHIES FUNCION will replace score function--------------------------------------------------------------------------------------------------------------
+                function makeSmoothies() {
+                    if (fruits[4][0] == lime) {
+                        limeCount = limeCount + 1;
+                    } else if (fruits[4][0] == rottenLemon) {
+                        limeCount = 0;
+                    }
+                    if (fruits[4][1] == bloodOrange) {
+                        bloodOrangeCount = bloodOrangeCount + 1;
+                    } else if (fruits[4][0] == rottenLemon) {
+                        bloodOrangeCount = 0;
+                    }
+                    if (fruits[4][2] == orange) {
+                        orangeCount = orangeCount + 1;
+                    } else if (fruits[4][0] == rottenLemon) {
+                        orangeCount = 0;
+                    }
+                    if (fruits[4][3] == grapeFruit) {
+                        grapeFruitCount = grapeFruitCount + 1;
+                    } else if (fruits[4][0] == rottenLemon) {
+                        grapeFruitCount = 0;
+                    }
+                    if (fruits[4][4] == lemon) {
+                        lemonCount = lemonCount + 1;
+                    } else if (fruits[4][0] == rottenLemon) {
+                        lemonCount = 0;
+                    }
+                    moveBoard();
+                }
+
+                // When player has successfully filled a smoothie blender and clicks that smoothie they will then score with the SERVER SMOOTHIES function----------------------
+                function serverSmoothies() {
+                    if (xClick == 0 && yClick == 6 && limeCount == serveCount) {
+                        playerScore += 1000;
+                        limeCount = 0;
+                    } else if (xClick == 1 && yClick == 6 && bloodOrangeCount == serveCount) {
+                        playerScore += 1000;
+                        bloodOrangeCount = 0;
+                    } else if (xClick == 2 && yClick == 6 && orangeCount == serveCount) {
+                        playerScore += 1000;
+                        orangeCount = 0;
+                    } else if (xClick == 3 && yClick == 6 && grapeFruitCount == serveCount) {
+                        playerScore += 1000;
+                        grapeFruitCount = 0;
+                    } else if (xClick == 04 && yClick == 6 && lemonCount == serveCount) {
+                        playerScore += 1000;
+                        lemonCount = 0;
+                    }
                 }
 
                 // Move array elements along their respective 'column' and randomly populate top row-------------------------------------------------------------------------------
