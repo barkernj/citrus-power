@@ -40,7 +40,7 @@
             var grapeFruitCount = 0;
             var time = 3;
             var pauseTime = 0;
-            var gamePaused = true;
+            var gamePaused = false;
             var fontStyle = "bold 16px Helvetica";
             var firstClick = true;
             var firstClickX = 0;
@@ -85,12 +85,14 @@
             var lemon = new Image();
             var orange = new Image();
             var grapeFruit = new Image();
-            var plus100 = new Image();
+            //var plus100 = new Image();
+            var splatter = new Image();
             var citrusStartMenu = new Image();
             var pauseScreen = new Image();
             var sfx01 = new Audio("/assets/rottenSplat.mp3");
-            var fps = 1;
+            var fps = 16;
             var serveCount = 3;
+            var startMenu = true;
             var fruits =
             [
                 [lime, bloodOrange, orange, grapeFruit, lemon],
@@ -125,13 +127,15 @@
                     xClick = xField;
                     yClick = yField;
 
-                    if (xField <= 4 && yField <= 4 && gamePaused) {
+                    if (xField <= 4 && yField <= 4 && !gamePaused) {
                         if (firstClick == true && fruits[xField][yField] == rottenLemon) {
-                            fruits[xField][yField] = plus100;
+                            fruits[xField][yField] = splatter;
                             playerScore = playerScore + 100;
                             firstClick = true;
                             sfx01.play();
-                            draw();
+                            if (!gamePaused) {
+                                draw();
+                            }
                         } else if (firstClick == true) {
                             temp = fruits[xField][yField];
                             firstClickX = xField;
@@ -162,11 +166,10 @@
                         }
                     } else if (xField == 5) {
                         serverSmoothies();
-                        console.log("Serve Smooties Function Called");
                     }
-                    draw();
-                    //console.log("xField: " + xField + " yField: " + yField);
-                    console.log("xClick: " + xClick + " yClick: " + yClick);
+                    if (!gamePaused) {
+                        draw();
+                    }
                 });
 
                 // LOAD ASSETS FUNCTION--------------------------------------------------------------------------------------------------------------------------------
@@ -209,10 +212,10 @@
                     //backgroundIdea04.src = 'assets/backgroundIdea04.png';
                     backgroundIdea05.src = 'assets/backgroundIdea05.png';
                     selector.src = 'assets/selector.png';
-                    plus100.src = 'assets/plus100.png';
+                    //plus100.src = 'assets/plus100.png';
                     citrusStartMenu.src = 'assets/citrus-start-menu.png';
                     pauseScreen.src = 'assets/pauseScreen.png';
-                    startMenu();
+                    splatter.src = 'assets/splatter.png';
                 }
 
                 // DRAW FUNCTION-----------------------------------------------------------------------------------------------------------------------------------------
@@ -242,8 +245,8 @@
                                 ctx.drawImage(bloodOrange, j * 100, i * 100);
                             } else if (fruits[i][j] == rottenLemon) {
                                 ctx.drawImage(rottenLemon, j * 100, i * 100);
-                            } else if (fruits[i][j] == plus100) {
-                                ctx.drawImage(plus100, j * 100, i * 100);
+                            } else if (fruits[i][j] == splatter) {
+                                ctx.drawImage(splatter, j * 100, i * 100);
                             }
                         }
 
@@ -306,8 +309,14 @@
                     ctx.font = fontStyle;
                     ctx.textAlign = "left";
                     ctx.textBaseline = "top";
-                    //ctx.fillText("Timer: " + (time), 25, 0);
+                    ctx.fillText("Timer: " + (time), 25, 0);
                     ctx.fillText("Score: " + (playerScore), 370, 0);
+
+                    //Start the game display the startMenu
+                    if (startMenu == true) {
+                        ctx.drawImage(citrusStartMenu, 0, 0);
+                        startGame();
+                    }
                 };
 
                 // TIMER FUNCTION--------------------------------------------------------------------------------------------------------------------------------------------
@@ -383,25 +392,27 @@
                     if (xClick == 5 && yClick == 0 && limeCount >= serveCount) {
                         playerScore += 1000;
                         limeCount = 0;
-                        console.log("Lime CLICKED");
+                        //console.log("Lime CLICKED");
                     } else if (xClick == 5 && yClick == 1 && bloodOrangeCount >= serveCount) {
                         playerScore += 1000;
                         bloodOrangeCount = 0;
-                        console.log("BloodOrange CLICKED");
+                        //console.log("BloodOrange CLICKED");
                     } else if (xClick == 5 && yClick == 2 && orangeCount >= serveCount) {
                         playerScore += 1000;
                         orangeCount = 0;
-                        console.log("Orange CLICKED");
+                        //console.log("Orange CLICKED");
                     } else if (xClick == 5 && yClick == 3 && grapeFruitCount >= serveCount) {
                         playerScore += 1000;
                         grapeFruitCount = 0;
-                        console.log("GrapeFruit CLICKED");
+                        //console.log("GrapeFruit CLICKED");
                     } else if (xClick == 05 && yClick == 4 && lemonCount >= serveCount) {
                         playerScore += 1000;
                         lemonCount = 0;
-                        console.log("Lemon CLICKED");
+                        //console.log("Lemon CLICKED");
                     }
-                    draw();
+                    if (!gamePaused) {
+                        draw();
+                    }
                 }
 
                 // Move array elements along their respective 'column' and randomly populate top row-------------------------------------------------------------------------------
@@ -541,14 +552,18 @@
                 }
 
                 // START MENU FUNCTION--------------------------------------------------------------------------------------------------------------------------------------------
-                function startMenu() {
-                    ctx.clearRect(0, 0, 500, 500);
-                    ctx.drawImage(citrusStartMenu, 0, 0);
+                function startGame() {
+                    time = 0;
+                    clearInterval(interval);
 
                     $("#myCanvas").click(function (e) {
-                        ctx.drawImage(citrusStartMenu, 0, 0);
+                        internal = setInterval(main, fps);
+                        console.log("its here");
+                        console.log(startMenu);
+                        time = 3;
+                        startMenu = false;
                     });
-                }
+                };
 
                 // Update Function----------------------------------------------------------------------------------------------------------------------------------------------
                 var update = function (modifier) {
@@ -559,29 +574,25 @@
                 function clear() {
                     var canvas = document.getElementById('myCanvas');
                     var ctx = canvas.getContext('2d');
-                    ctx.clearRect(0, 0, 500, 500);
+                    ctx.clearRect(0, 0, 500, 600);
                 };
 
                 // Pause Game----------------------------------------------------------------------------------------------------------------------------------------------------
                 $("#pause").click(function (e) {
                     pauseGame();
                 });
-                function keyDown(e) {
-                    if (e.keyCode == 80) pauseGame();
-                    console.log('e key pressed');
-                }
                 function pauseGame() {
-                    if (!gamePaused) {
+                    if (gamePaused) {
                         interval = setInterval(main, fps);
                         time = pauseTime;
                         pauseTime = 0;
-                        gamePaused = true;
-                    } else if (gamePaused) {
+                        gamePaused = false;
+                    } else if (!gamePaused) {
                         clearInterval(interval);
                         ctx.drawImage(pauseScreen, 0, 0);
                         pauseTime = time;
                         time = 0;
-                        gamePaused = false;
+                        gamePaused = true;
                     }
                 }
 
@@ -591,7 +602,9 @@
                     var delta = now - then;
 
                     update(delta / 1000);
-                    draw();
+                    if (!gamePaused) {
+                        draw();
+                    }
 
                     then = now;
                 };
@@ -606,7 +619,7 @@
     </head>
     <body onload="init()">
         <div class="gameWrapper">
-            <div class="title"><h1><span style="color: #c91900;">C</span><span style="color: #FFF8C6;">I</span><span style="color: #00FF00;">T</span><span style="color: #DC381F;">R</span><span style="color: #00FF00;">U</span><span style="color: #FFA500;">S</span> <span style="color: #c91900;">P</span><span style="color: #FFF8C6;">O</span><span style="color: #00FF00;">W</span><span style="color: #DC381F;">E</span><span style="color: #00FF00;">R</span><span style="color: #FFA500;">!</span></h1></div>
+            <!--<div class="title"><h1><span style="color: #c91900;">C</span><span style="color: #FFF8C6;">I</span><span style="color: #00FF00;">T</span><span style="color: #DC381F;">R</span><span style="color: #00FF00;">U</span><span style="color: #FFA500;">S</span> <span style="color: #c91900;">P</span><span style="color: #FFF8C6;">O</span><span style="color: #00FF00;">W</span><span style="color: #DC381F;">E</span><span style="color: #00FF00;">R</span><span style="color: #FFA500;">!</span></h1></div>-->
             <div id="game" class="layer">
                 <canvas id="myCanvas" width="500" height="600">
                     <p>Your browser does not support HTML5!</p>
@@ -615,7 +628,7 @@
             <!-- <div class="controls">
                 <a href="http://game.oopiedoopie.com/dragon.html"><h4>Next Project</h4></a>
             </div> -->
-            <div id="pause" style="color: white;"><p>PAUSE</p></div>
+            <div id="pause" style="text-align:center; color: white; cursor: pointer;"><h3 style=" border: 2px solid white; border-radius: 10px; width: 100px; margin-left: 40%;">PAUSE</h3></div>
             <div class="displayArray"></div>
         </div>
         <!--<script type="text/javascript" src="citrus-power-script.js"></script>-->
