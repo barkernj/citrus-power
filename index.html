@@ -136,7 +136,7 @@
                             if (!gamePaused) {
                                 draw();
                             }
-                        } else if (firstClick == true) {
+                        } /* else if (firstClick == true) {
                             temp = fruits[xField][yField];
                             firstClickX = xField;
                             firstClickY = yField;
@@ -163,7 +163,7 @@
                             firstClick = true;
                         } else {
                             firstClick = false;
-                        }
+                        } */
                     } else if (xField == 5) {
                         serverSmoothies();
                     }
@@ -174,6 +174,8 @@
 
                 // LOAD ASSETS FUNCTION--------------------------------------------------------------------------------------------------------------------------------
                 function loadAssets() {
+                    citrusStartMenu.src = 'assets/citrus-start-menu.png';
+                    pauseScreen.src = 'assets/pauseScreen.png';
                     lime.src = 'assets/lime-small.png';
                     lemon.src = 'assets/lemon-small.png';
                     orange.src = 'assets/orange-small.png';
@@ -213,8 +215,6 @@
                     backgroundIdea05.src = 'assets/backgroundIdea05.png';
                     selector.src = 'assets/selector.png';
                     //plus100.src = 'assets/plus100.png';
-                    citrusStartMenu.src = 'assets/citrus-start-menu.png';
-                    pauseScreen.src = 'assets/pauseScreen.png';
                     splatter.src = 'assets/splatter.png';
                 }
 
@@ -222,11 +222,7 @@
                 function draw() {
                     // Clear Canvas
                     clear();
-
-                    //ctx.drawImage(backgroundIdea, 0, 0);
-                    //ctx.drawImage(backgroundIdea02, 0, 0);
-                    //ctx.drawImage(backgroundIdea03, 0, 0);
-                    //ctx.drawImage(backgroundIdea04, 0, 0);
+                    
                     ctx.drawImage(backgroundIdea05, 0, 0);
 
                     for (var i = 0; i < fruits.length; i++) { // Rows
@@ -416,7 +412,7 @@
                 }
 
                 // Move array elements along their respective 'column' and randomly populate top row-------------------------------------------------------------------------------
-                function moveBoard() {
+                /* function moveBoard() {
                     for (var i = fruits.length - 1; i >= 0; --i) {
                         for (var j = fruits[i].length - 1; j >= 0; --j) {
                             if (i < 4) {
@@ -443,7 +439,7 @@
                             }
                         }
                     }
-                }
+                } */
 
                 // Move array elements along their respective 'column' and populate top row with same colors + rotten fruits----------------------------------------------------
                 function moveBoardModified() {
@@ -563,11 +559,6 @@
                         time = 3;
                         startMenu = false;
                     });
-                };
-
-                // Update Function----------------------------------------------------------------------------------------------------------------------------------------------
-                var update = function (modifier) {
-
                 };
 
                 // Clear Canvas Function----------------------------------------------------------------------------------------------------------------------------------------

@@ -1,0 +1,44 @@
+body {
+    background-image: url('assets/backgroundIdea05.png');
+}
+
+#grapefruit {
+    position: absolute;
+    opacity: 0.5;
+    left: 10%;
+    top: 10%;
+    border: 10px solid white;
+}
+#grapefruit:hover {
+    opacity: 1;
+}
+#lemon {
+    position: absolute;
+    opacity: 0.5;
+    right: 10%;
+    top: 10%;
+    border: 10px solid white;
+}
+#lemon:hover {
+    opacity: 1;
+}
+#orange {
+    position: absolute;
+    opacity: 0.5;
+    left: 10%;
+    bottom: 10%;
+    border: 10px solid white;
+}
+#orange:hover {
+    opacity: 1;
+}
+#lime {
+    position: absolute;
+    opacity: 0.5; 
+    right: 10%;
+    bottom: 10%;
+    border: 10px solid white;
+}
+#lime:hover {
+    opacity: 1;
+}
